@@ -1,0 +1,40 @@
+# Data Pipeline Project
+
+This project is designed to ingest, validate, and process data into a PostgreSQL database using Docker and PowerShell. The pipeline includes data validation steps to ensure data integrity before inserting it into dimension and fact tables.
+
+## Project Structure
+
+- `deploy_compose.ps1`: PowerShell script to deploy the Docker containers and run the data pipeline.
+- `create_tables.sql`: SQL script to create tables
+- `insert_data.sql`: SQL script to validate and insert data into the PostgreSQL database.
+- `ingest_raw_data.py`: Python script to read, validate, and ingest raw data into PostgreSQL staging tables.
+- `pipeline_log.txt`: Log file generated during the pipeline execution.
+
+## Prerequisites
+
+- Docker
+- Docker Compose
+- PowerShell
+- PostgreSQL
+- Python 3.x
+- `sqlalchemy` and `pandas` Python libraries
+
+## Setup
+
+1. **Clone the repository:**
+
+   ```sh
+   git clone https://github.com/your-repo/data-pipeline-project.git
+   cd data-pipeline-project
+
+2. **How to run:**
+
+- Run this one by one
+
+    ```docker-compose up -d
+    $containerId = docker ps -q -f name=dematest-db-1
+    docker exec -it $containerId psql -U admin -d ecommerce -a -f /var/lib/postgresql/sql/create_tables.sql
+    ./deploy_compose.ps1
+    docker-compose down
+
+    docker exec -it $containerId psql -U admin -d ecommerce 
