@@ -14,10 +14,18 @@ This project is designed to ingest, validate, and process data into a PostgreSQL
 
 - Docker
 - Docker Compose
+- VS Code
 - PowerShell
 - PostgreSQL
 - Python 3.x
 - `sqlalchemy` and `pandas` Python libraries
+
+## DB Details used:
+- db_host = 'localhost'
+- db_port = '5432'
+- db_name = 'ecommerce'
+- db_user = 'admin'
+- db_password = 'admin'
 
 ## Setup
 
@@ -29,7 +37,7 @@ This project is designed to ingest, validate, and process data into a PostgreSQL
 
 2. **How to run:**
 
-- Run this one by one
+- Run this one by one in terminal 
 
     ```docker-compose up -d
     $containerId = docker ps -q -f name=dematest-db-1
@@ -37,4 +45,5 @@ This project is designed to ingest, validate, and process data into a PostgreSQL
     ./deploy_compose.ps1
     docker-compose down
 
+- If you want to check the db do not run the docker-compose down command. Please execute the following command to get run the query in the DB
     docker exec -it $containerId psql -U admin -d ecommerce 
