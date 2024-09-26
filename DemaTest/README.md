@@ -39,7 +39,8 @@ This project is designed to ingest, validate, and process data into a PostgreSQL
 
 - Run this one by one in terminal 
 
-    ```docker-compose up -d
+    ```
+    docker-compose up -d
     $containerId = docker ps -q -f name=dematest-db-1
     docker exec -it $containerId psql -U admin -d ecommerce -a -f /var/lib/postgresql/sql/create_tables.sql
     ./deploy_compose.ps1
@@ -47,11 +48,13 @@ This project is designed to ingest, validate, and process data into a PostgreSQL
 
 - If you want to check the db do not run the docker-compose down command. Please execute the following command to get run the query in the DB
 
-  ``` docker exec -it $containerId psql -U admin -d ecommerce
+  ```
+  docker exec -it $containerId psql -U admin -d ecommerce
 
 - For Reorts run the below query. For Dashboards we can us any kind of BI Tools:
 
-  ``` # Total Sales by Product
+  ```
+   # Total Sales by Product
    SELECT dp.product_name, ROUND(SUM(cast(amount as NUMERIC)),2) AS total_sales FROM fact_sales fs JOIN dim_product dp ON fs.product_id = dp.product_id GROUP BY dp.product_name ORDER BY total_sales DESC;
    # Top Selling Products
    SELECT dp.product_name, COUNT(fs.order_id) AS total_orders FROM fact_sales fs JOIN dim_product dp ON fs.product_id = dp.product_id GROUP BY dp.product_name ORDER BY total_orders DESC;
