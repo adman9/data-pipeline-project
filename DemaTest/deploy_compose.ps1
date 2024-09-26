@@ -85,7 +85,7 @@ Test-Run-Sql "SELECT dp.category, ROUND(SUM(cast(amount as NUMERIC)),2) AS total
 
 # Monthly Sales Trend
 Log-Message "Monthly Sales Trend:"
-Test-Run-Sql "SELECT month AS sales_month, ROUND(SUM(cast(amount as NUMERIC)),2) AS total_sales FROM fact_sales fs JOIN dim_time dt ON fs.time_id = dt.time_id GROUP BY month ORDER BY month LIMIT 10;;"
+Test-Run-Sql "SELECT month AS sales_month, ROUND(SUM(cast(amount as NUMERIC)),2) AS total_sales FROM fact_sales fs JOIN dim_time dt ON fs.time_id = dt.time_id GROUP BY month ORDER BY month LIMIT 10;"
 
 Log-Message "Pipeline test completed."
 
