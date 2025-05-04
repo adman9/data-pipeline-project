@@ -57,6 +57,19 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
 
+      - name: Check if GCS Bucket exists
+        id: check-bucket
+        run: |
+          BUCKET_NAME="bank-data-pipeline-tfstate"
+          echo "BUCKET_NAME=bank-data-pipeline-tfstate" >> $GITHUB_ENV
+          if gsutil ls -b gs://$BUCKET_NAME > /dev/null 2>&1; then
+            echo "Bucket exists"
+          else
+            echo "Bucket does not exists"
+            echo "Creating bucket $TFSTATE_BUCKET_NAME..."
+            gsutil mb gs://$BUCKET_NAME
+          fi
+
 
       - name: Build and Push Docker Image
         working-directory: ./bank-data-pipeline
