@@ -6,7 +6,6 @@ variable "project_id" {
 variable "region" {
   description = "The region in which to deploy resources."
   type        = string
-  default     = "us-central1"
 }
 
 variable "trigger_bucket_name" {
@@ -16,6 +15,11 @@ variable "trigger_bucket_name" {
 
 variable "archival_bucket_name" {
   description = "The name of the Cloud Storage bucket for archival."
+  type        = string
+}
+
+variable "region" {
+  description = "The region in which to deploy resources."
   type        = string
 }
 
