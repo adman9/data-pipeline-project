@@ -8,10 +8,8 @@ on:
         description: Project environment selection
         required: true
         options:
-          - prod
-          - stage
-          - test
           - dev
+          - stage
       action:
         type: choice
         description: Action selection [apply/destroy]
@@ -63,6 +61,7 @@ jobs:
       - name: Build and Push Docker Image
         working-directory: ./bank-data-pipeline
         run: |
+            gcloud auth configure-docker europe-north2-docker.pkg.dev
             docker build -t ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ vars.REPO_NAME }}/${{ vars.IMAGE_NAME }}:latest -f Dockerfile .
             docker push ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ vars.REPO_NAME }}/${{ vars.IMAGE_NAME }}:latest
   
