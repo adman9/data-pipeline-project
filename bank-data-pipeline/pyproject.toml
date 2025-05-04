@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "bnk-data-gcs-bq"
+version = "0.1.0"
+description = "data pipeline for Banking Data Analysis"
+readme = "README.md"
+authors = ["Aditya Mandal <aditya.180984@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "~3.11"
+pandas = ">=2.2.2"
+google-cloud-bigquery = "^3.31.0"
+google-cloud-storage = "^3.1.0"
+google-cloud-logging = "^3.12.1"
+functions-framework = "^3.8.2"
+pyarrow = "^20.0.0"
+
+[tool.poetry.group.dev.dependencies]
+functions-framework = "^3.8.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

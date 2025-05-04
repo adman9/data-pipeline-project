@@ -1,3 +1,4 @@
 .env
 data/inputfiles/*.csv
 pipeline_log.txt
+__pycache__
