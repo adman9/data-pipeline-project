@@ -18,8 +18,3 @@ variable "archival_bucket_name" {
   type        = string
 }
 
-variable "region" {
-  description = "The region in which to deploy resources."
-  type        = string
-}
-

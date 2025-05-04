@@ -35,21 +35,21 @@ resource "google_storage_bucket_lifecycle_policy" "archival_bucket_lifecycle" {
 }
 
 module "service_account" {
-  source                  = "./modules/service-account"
+  source                  = "./modules/service_account"
   project_id              = var.project_id
   service_account_id      = var.service_acount
   service_account_display_name = "Cloud Function Service Account"
 }
 
 module "artifact_registry" {
-  source                = "./modules/artifact-registry"
+  source                = "./modules/artifactory"
   project_id            = var.project_id
   region                = var.region
   docker_repository_id  = var.docker_repository_id
 }
 
 module "cloud_function" {
-  source                = "./modules/cloud-function"
+  source                = "./modules/cloud_functions"
   project_id            = var.project_id
   region                = var.region
   service_account_email = module.service_account.service_account_email
