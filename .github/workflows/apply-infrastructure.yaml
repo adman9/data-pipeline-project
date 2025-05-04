@@ -1,0 +1,94 @@
+name: Apply Terraform Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: Project environment selection
+        required: true
+        options:
+          - prod
+          - stage
+          - test
+          - dev
+      action:
+        type: choice
+        description: Action selection [apply/destroy]
+        required: true
+        default: apply
+        options:
+          - apply
+          - destroy
+      apply:
+        type: boolean
+        description: Execute action
+        default: false
+
+jobs:
+  apply-composer-terraform:
+    name: Deploy GCP Resources with Terraform
+    environment: ${{ github.event.inputs.environment }}
+    runs-on: ubuntu-latest
+    env:
+      TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
+      TF_VAR_region: ${{ vars.GCP_REGION }}
+
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: latest
+
+      - name: GCP Authentication
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          workload_identity_provider: ${{ secrets.IDENTITY }}
+          service_account: ${{ secrets.GCP_SA }}
+
+      - name: Build and Push Docker Image
+        working-directory: ./bank-data-ppipeline
+        run: |
+            docker build -t ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ vars.REPO_NAME }}/${{ vars.IMAGE_NAME }}:latest -f  Dockerfile
+            docker push ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ vars.REPO_NAME }}/${{ vars.IMAGE_NAME }}:latest
+  
+
+      - name: Terraform init
+        id: init
+        working-directory: ./infrastructure/components
+        run: |
+          terraform init
+          terraform workspace select -or-create ${{ github.event.inputs.environment }}
+
+      - name: Terraform Plan
+        id: plan
+        working-directory: ./infrastructure/components
+        run: |
+          terraform workspace show
+          terraform plan -no-color -input=false -out=tfplan
+
+      - name: Terraform Apply
+        id: apply
+        if: ${{ inputs.action == 'apply' && inputs.apply == true }}
+        working-directory: ./infrastructure/components
+        run: |
+          terraform workspace show
+          terraform apply -auto-approve tfplan
+
+      - name: Terraform Destroy
+        id: destroy
+        if: ${{ inputs.action == 'destroy' && inputs.apply == true }}
+        working-directory: ./infrastructure/components
+        run: |
+          terraform workspace show
+          terraform destroy -auto-approve
