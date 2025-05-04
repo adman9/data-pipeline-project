@@ -1,4 +1,5 @@
 [tool.poetry]
+package-mode = false
 name = "bnk-data-gcs-bq"
 version = "0.1.0"
 description = "data pipeline for Banking Data Analysis"
