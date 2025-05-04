@@ -30,8 +30,5 @@ resource "google_project_iam_member" "logs_writer" {
   member  = "serviceAccount:${google_service_account.cloud_function_sa.email}"
 }
 
-output "service_account_email" {
-  description = "The email of the service account used"
-  value       = google_service_account.cloud_function_sa.email
-}
+
 

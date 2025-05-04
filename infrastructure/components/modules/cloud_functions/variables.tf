@@ -31,17 +31,6 @@ variable "docker_repository" {
   type        = string
 }
 
-variable "environment_variables" {
-  description = "A map of environment variables."
-  type        = map(string)
-  default     = {
-    "PROJECT_ID" = var.project_id
-    "REGION" = var.region
-    "DATASET" = "BNK_DATA"
-    "ARCHIVE_BUCKET" = var.archival_bucket_name
-    "SPLITTER" = ","
-  }
-}
 
 variable "max_instance_count" {
   description = "Maximum number of instances."

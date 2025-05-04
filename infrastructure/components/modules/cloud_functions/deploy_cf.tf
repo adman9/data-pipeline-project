@@ -23,7 +23,13 @@ resource "google_cloudfunctions2_function" "my_cloud_function" {
     available_memory = var.available_memory
     timeout_seconds = var.timeout_seconds
   }
-  environment_variables = var.environment_variables
+  environment_variables = {
+    "PROJECT_ID" = var.project_id
+    "REGION" = var.region
+    "DATASET" = "BNK_DATA"
+    "ARCHIVE_BUCKET" = var.archival_bucket_name
+    "SPLITTER" = ","
+  }
   depends_on = [
     google_artifact_registry_repository.my_docker_repository,
   ]
@@ -37,8 +43,4 @@ resource "google_cloudfunctions2_function_iam_member" "invoker" { # Changed reso
   member   = var.allow_all_users
 }
 
-output "function_url" {
-  description = "The URL of the deployed Cloud Function."
-  value       = google_cloudfunctions2_function.uri
-  sensitive   = true
-}
+
