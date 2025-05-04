@@ -42,9 +42,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-            fetch-depth: '0'
-      - run: git config user.name "GitHub Actions" && git config user.email "actions@users.noreply.github.com"
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
@@ -60,10 +57,8 @@ jobs:
           service_account: ${{ secrets.GCP_SA }}
 
       - name: Build and Push Docker Image
-        working-directory: /bank-data-ppipeline
+        working-directory: ./bank-data-pipeline
         run: |
-            ls
-            pwd
             docker build -t ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ vars.REPO_NAME }}/${{ vars.IMAGE_NAME }}:latest -f  Dockerfile
             docker push ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ vars.REPO_NAME }}/${{ vars.IMAGE_NAME }}:latest
   
