@@ -91,7 +91,7 @@ jobs:
         working-directory: ./infrastructure/components
         run: |
           terraform workspace show
-          terraform plan -no-color -input=false -out=tfplan
+            terraform plan -no-color -input=false -out=tfplan -var-file=terraform.tfvars
 
       - name: Terraform Apply
         id: apply
