@@ -4,7 +4,8 @@ FROM python:3.11
 RUN pip install poetry
 ADD pyproject.toml README.md /app/
 WORKDIR /app
-COPY . /app/
+COPY bnk-data-gcs-bq/src/main.py /app/main.py
+COPY bnk-data-gcs-bq/src/utils/ /app/utils/
 RUN poetry install
 RUN poetry export --without-hashes --format=requirements.txt > requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
