@@ -59,6 +59,8 @@ jobs:
       - name: Build and Push Docker Image
         working-directory: /bank-data-ppipeline
         run: |
+            ls
+            pwd
             docker build -t ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ vars.REPO_NAME }}/${{ vars.IMAGE_NAME }}:latest -f  Dockerfile
             docker push ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ vars.REPO_NAME }}/${{ vars.IMAGE_NAME }}:latest
   
