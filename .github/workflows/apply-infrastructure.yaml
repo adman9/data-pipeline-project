@@ -42,6 +42,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+            fetch-depth: '0'
+      - run: git config user.name "GitHub Actions" && git config user.email "actions@users.noreply.github.com"
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
