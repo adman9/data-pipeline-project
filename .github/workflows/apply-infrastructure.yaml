@@ -55,6 +55,10 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           workload_identity_provider: ${{ secrets.IDENTITY }}
           service_account: ${{ secrets.GCP_SA }}
+      
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
 
       - name: Build and Push Docker Image
         working-directory: ./bank-data-pipeline
