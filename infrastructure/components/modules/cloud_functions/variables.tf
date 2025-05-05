@@ -22,7 +22,7 @@ variable "function_name" {
 variable "runtime" {
   description = "The runtime environment."
   type        = string
-  default     = "python311"
+  default     = "custom"
 }
 
 

@@ -53,7 +53,7 @@ module "cloud_function" {
   docker_repository     = module.artifact_registry.docker_repository
   image     = module.artifact_registry.image
   function_name         = "gcf-bank-transaction-gcs-bq-v1"
-  runtime               = "python311"
+  runtime               = "custom"
   max_instance_count = 10
   available_memory = "512Mi"
   timeout_seconds = 300
