@@ -31,6 +31,10 @@ variable "docker_repository" {
   type        = string
 }
 
+variable "image" {
+  description = "The full path to the Docker repository."
+  type        = string
+}
 
 variable "max_instance_count" {
   description = "Maximum number of instances."
