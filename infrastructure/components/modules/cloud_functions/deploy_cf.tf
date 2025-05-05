@@ -9,7 +9,7 @@ terraform {
 
 resource "google_cloudfunctions2_function" "my_cloud_function" {
   name = var.function_name
-  location = var.region
+  location = "europe-west1"
   description = "cloud Function to load the files from storage to big query"
 
   build_config {
