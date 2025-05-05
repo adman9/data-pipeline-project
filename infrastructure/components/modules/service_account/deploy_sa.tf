@@ -43,7 +43,7 @@ resource "google_service_account_iam_binding" "cloud_function_sa_use" {
   
 }
 
-resource "google_service_account_iam_binding" "cloud_function_sa_use" {
+resource "google_service_account_iam_binding" "compute_sa_use" {
   service_account_id = "${data.google_project.project.number}-compute@developer.gserviceaccount.com"
   role    = "roles/iam.serviceAccountUser"
   members  = [
