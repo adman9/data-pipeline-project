@@ -94,14 +94,14 @@ jobs:
 
       - name: Terraform init
         id: init
-        working-directory: ./infrastructure/components
+        working-directory: ./bank-data-pipeline/infrastructure/components
         run: |
           terraform init
           terraform workspace select -or-create ${{ github.event.inputs.environment }}
 
       - name: Terraform Plan
         id: plan
-        working-directory: ./infrastructure/components
+        working-directory: ./bank-data-pipeline/infrastructure/components
         run: |
           terraform workspace show
             terraform plan -no-color -input=false -out=tfplan
@@ -109,7 +109,7 @@ jobs:
       - name: Terraform Apply
         id: apply
         if: ${{ inputs.action == 'apply' && inputs.apply == true }}
-        working-directory: ./infrastructure/components
+        working-directory: ./bank-data-pipeline/infrastructure/components
         run: |
           terraform workspace show
           terraform apply -auto-approve tfplan
@@ -117,7 +117,7 @@ jobs:
       - name: Terraform Destroy
         id: destroy
         if: ${{ inputs.action == 'destroy' && inputs.apply == true }}
-        working-directory: ./infrastructure/components
+        working-directory: ./bank-data-pipeline/infrastructure/components
         run: |
           terraform workspace show
           terraform destroy -auto-approve

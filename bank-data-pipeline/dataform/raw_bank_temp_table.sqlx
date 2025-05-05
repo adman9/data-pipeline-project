@@ -1,0 +1,7 @@
+config {
+    type: "table",
+    schema: "BNK_DATA",
+    tags: ["source_data"]
+}
+SELECT *
+FROM bank_trans_raw_temp_table
