@@ -55,7 +55,7 @@ module "cloud_function" {
   source_code_bucket    = var.source_code_bucket
   source_code_name      = var.source_code_name
   docker_repository     = module.artifact_registry.docker_repository
-  function_name         = "gcf-bank-transaction-gcs-bq-v1"
+  function_name         = "gcf-bank-transaction-gcs-bq-v2"
   runtime               = "python311"
   max_instance_count = 10
   available_memory = "512Mi"

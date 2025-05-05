@@ -1,5 +1,5 @@
 trigger_bucket_name   = "bnk-trans-bucket"
 archival_bucket_name  = "bnk-trans-bucket-archieve"
 service_acount        = "gcf-bank-transaction-gcs-bq-sa"
-function_name         = "gcf-bank-transaction-gcs-bq-v1"
+function_name         = "gcf-bank-transaction-gcs-bq-v2"
 docker_repository_id  = "gcf-bank-transaction-gcs-bq-repo"
