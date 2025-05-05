@@ -12,6 +12,11 @@ provider "google" {
   region  = var.region
 }
 
+resource "google_storage_bucket" "trigger_bucket" {
+  name     = var.trigger_bucket_name
+  location = var.region
+  force_destroy = true
+ }
 
 resource "google_storage_bucket" "archival_bucket" {
   name     = var.archival_bucket_name
