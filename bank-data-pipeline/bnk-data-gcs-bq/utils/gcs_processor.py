@@ -1,4 +1,3 @@
-import os
 import logging
 from google.cloud import storage, exceptions
 
@@ -46,7 +45,7 @@ class GCSProcessor(object):
         except exceptions as e:
             logging.error(f"Error Message : There is an exception in gcs_copy_blob() method {str(e)}, Alert : GCS-003")
             raise e
-
+        
     def gcs_delete_blob(self, bucket_name, blob_name):
         """Deletes a blob from the bucket"""
         try:
