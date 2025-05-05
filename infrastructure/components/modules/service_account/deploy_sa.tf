@@ -31,13 +31,4 @@ resource "google_project_iam_member" "logs_writer" {
 }
 
 
-resource "google_service_account_iam_binding" "cloud_function_sa_use" {
-  project = var.project_id
-  role    = "roles/iam.serviceAccountUser"
-  members  = [
-    "serviceAccount:${google_service_account.cloud_function_sa.email}",
-  ]
-  
-}
-
 
