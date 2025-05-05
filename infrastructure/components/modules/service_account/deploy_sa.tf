@@ -39,6 +39,23 @@ resource "google_project_iam_member" "storage_admin" {
   member  = "serviceAccount:${google_service_account.cloud_function_sa.email}"
 }
 
+resource "google_project_iam_member" "run_invoker" {
+  project = var.project_id
+  role    = "roles/run.invoker"
+  member  = "serviceAccount:${google_service_account.cloud_function_sa.email}"
+}
+
+resource "google_project_iam_member" "bq" {
+  project = var.project_id
+  role    = "roles/bigquery.jobUser"
+  member  = "serviceAccount:${google_service_account.cloud_function_sa.email}"
+}
+
+resource "google_project_iam_member" "bq_editor" {
+  project = var.project_id
+  role    = "roles/bigquery.dataEditor"
+  member  = "serviceAccount:${google_service_account.cloud_function_sa.email}"
+}
 
 resource "google_service_account_iam_binding" "cloud_function_sa_use" {
   service_account_id = google_service_account.cloud_function_sa.name

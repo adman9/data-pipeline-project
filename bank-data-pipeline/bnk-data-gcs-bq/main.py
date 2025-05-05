@@ -49,18 +49,22 @@ def data_loading(cloud_event: CloudEvent):
             load_data_bigquery(PROJECT_ID, DATESET, csv_input)
             logging.info("Raw file {} successfully uploaded to bigquery".format(filename))
             archive_blob_path = f"success/{(date.today()).strftime('%Y%m%d')}/{timestamp}_{filename}"
-            gcs_processor.gcs_copy_blob(incoming_bucket_name, incoming_blob_path, ARCHIEVE_BUCKET, archive_blob_path)
 
         else:
             logging.info(f"File from the bucket is not CSV : {filename}")
             timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
             archive_blob_path = f"fail/{(date.today()).strftime('%Y%m%d')}/{timestamp}_{filename}"
-            gcs_processor.gcs_copy_blob(incoming_bucket_name, incoming_blob_path, ARCHIEVE_BUCKET, archive_blob_path)
             logging.error(f"Error Message : There is an exception in the main class : The file {filename} is not CSV, Alert : MN-002")
     
+        gcs_processor.gcs_copy_blob(incoming_bucket_name, incoming_blob_path, ARCHIEVE_BUCKET, archive_blob_path)
         gcs_processor.gcs_delete_blob(incoming_bucket_name, incoming_blob_path)
         logging.info("Execution of {function_name} is finished successfully.")
 
     except Exception as e:
+        if filename is not None:
+            archive_blob_path = f"fail/{(date.today()).strftime('%Y%m%d')}/{timestamp}_{filename}"
+            gcs_processor.gcs_copy_blob(incoming_bucket_name, incoming_blob_path, ARCHIEVE_BUCKET, archive_blob_path)
+            gcs_processor.gcs_delete_blob(incoming_bucket_name, incoming_blob_path)
         logging.error("Error Message : Error in main class uploading file {} to bigquery with upload date {}: {}, Alert : MN-001".format(filename, datetime.now().strftime('%Y%m%d%H%M%S'), str(e)))
+        logging.info("Execution of {function_name} is failed.")
 
