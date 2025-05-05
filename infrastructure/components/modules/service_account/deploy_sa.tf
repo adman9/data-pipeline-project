@@ -33,12 +33,12 @@ resource "google_project_iam_member" "logs_writer" {
   member  = "serviceAccount:${google_service_account.cloud_function_sa.email}"
 }
 
-
 resource "google_service_account_iam_binding" "cloud_function_sa_use" {
   service_account_id = google_service_account.cloud_function_sa.name
   role    = "roles/iam.serviceAccountUser"
   members  = [
     "serviceAccount:${data.google_project.project.number}@cloudbuild.gserviceaccount.com",
+    "serviceAccount:sa-cicd@favorable-kiln-458413-r9.iam.gserviceaccount.com",
   ]
   
 }
