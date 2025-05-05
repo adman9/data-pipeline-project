@@ -20,3 +20,7 @@ variable "archival_bucket_name" {
   default     = "bnk-trans-bucket-archieve"
 }
 
+variable "docker_repository_id" {
+  description = "The ID of the Docker repository."
+  type        = string
+}

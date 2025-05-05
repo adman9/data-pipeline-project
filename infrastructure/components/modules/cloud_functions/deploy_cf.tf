@@ -35,12 +35,10 @@ resource "google_cloudfunctions2_function" "my_cloud_function" {
   ]
 }
 
-resource "google_cloudfunctions2_function_iam_member" "invoker" {
-  project  = var.project_id
-  location   = var.region 
-  function = google_cloudfunctions2_function.my_cloud_function.name 
-  role     = "roles/cloudfunctions.invoker"
-  member   = var.allow_all_users
+resource "google_cloudfunctions2_function_iam_member" "member" {
+  project = google_cloudfunctions2_function.my_cloud_function.project
+  location = google_cloudfunctions2_function.my_cloud_function.location
+  cloud_function = google_cloudfunctions2_function.my_cloud_function.name
+  role = "roles/cloudfunctions.invoker"
+  member = var.allow_all_users
 }
-
-

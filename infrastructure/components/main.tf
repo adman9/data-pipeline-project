@@ -25,7 +25,7 @@ resource "google_storage_bucket" "archival_bucket" {
       type = "Delete"
     }
     condition {
-      age_in_days = 7
+      age = 7
     }
   }
 }
