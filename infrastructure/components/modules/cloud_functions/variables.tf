@@ -60,3 +60,9 @@ variable "trigger_bucket_name" {
   description = "The name of the Cloud Storage bucket that triggers the function."
   type        = string
 }
+
+variable "archival_bucket_name" {
+  description = "The name of the Cloud Storage bucket for archival."
+  type        = string
+  default     = "bnk-trans-bucket-archieve"
+}
