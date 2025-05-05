@@ -51,6 +51,7 @@ module "cloud_function" {
   region                = var.region
   service_account_email = module.service_account.service_account_email
   docker_repository     = module.artifact_registry.docker_repository
+  image     = module.artifact_registry.image
   function_name         = "gcf-bank-transaction-gcs-bq-v1"
   runtime               = "python311"
   max_instance_count = 10
