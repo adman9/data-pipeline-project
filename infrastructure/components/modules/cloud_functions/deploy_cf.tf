@@ -14,16 +14,19 @@ resource "google_cloudfunctions2_function" "my_cloud_function" {
 
   build_config {
     runtime     = var.runtime
-    entry_point = "data_loading" 
+    entry_point = "data_loading"
+    source {
+      storage_source {
+        bucket = var.source_code_bucket
+        object = var.source_code_name
+      }
+    }
     environment_variables = {
       "PROJECT_ID" = var.project_id
       "REGION" = var.region
       "DATASET" = "BNK_DATA"
       "ARCHIVE_BUCKET" = var.archival_bucket_name
       "SPLITTER" = ","
-    }
-    source {
-      image = var.image
     }
   }
 

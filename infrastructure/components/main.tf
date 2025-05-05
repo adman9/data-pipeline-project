@@ -51,9 +51,10 @@ module "cloud_function" {
   region                = var.region
   service_account_email = module.service_account.service_account_email
   docker_repository     = module.artifact_registry.docker_repository
-  image     = module.artifact_registry.image
+  storage_source_bucket = var.source_code_bucket
+  storage_source_name   = var.source_code_name
   function_name         = "gcf-bank-transaction-gcs-bq-v1"
-  runtime               = "custom"
+  runtime               = "python311"
   max_instance_count = 10
   available_memory = "512Mi"
   timeout_seconds = 300

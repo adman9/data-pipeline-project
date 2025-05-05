@@ -22,7 +22,7 @@ variable "function_name" {
 variable "runtime" {
   description = "The runtime environment."
   type        = string
-  default     = "custom"
+  default     = "python311"
 }
 
 
@@ -69,4 +69,14 @@ variable "archival_bucket_name" {
   description = "The name of the Cloud Storage bucket for archival."
   type        = string
   default     = "bnk-trans-bucket-archieve"
+}
+
+variable "source_code_bucket" {
+  description = "The Image name of the docker."
+  type        = string
+}
+
+variable "source_code_name" {
+  description = "The Image name of the docker."
+  type        = string
 }

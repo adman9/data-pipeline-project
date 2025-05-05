@@ -98,6 +98,7 @@ jobs:
             fi
             gsutil cp ${ZIPPED_FILE_NAME} gs://${FOLDER_NAME}-bucket/${ZIPPED_FILE_NAME}
             echo "TF_VAR_source_code_name=${ZIPPED_FILE_NAME}" >> $GITHUB_ENV
+            echo "TF_VAR_source_code_bucket=${FOLDER_NAME}-bucket" >> $GITHUB_ENV
 
       - name: Terraform init
         id: init
