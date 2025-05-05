@@ -23,7 +23,9 @@ resource "google_cloudfunctions2_function" "my_cloud_function" {
       "SPLITTER" = ","
     }
     docker_repository = var.docker_repository
-    image = var.image
+    source {
+      image = var.image
+    }
   }
 
   service_config {

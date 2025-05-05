@@ -79,7 +79,25 @@ jobs:
             gcloud auth configure-docker europe-north2-docker.pkg.dev
             docker build -t ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ vars.REPO_NAME }}/${{ vars.IMAGE_NAME }}:latest -f Dockerfile .
             docker push ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ vars.REPO_NAME }}/${{ vars.IMAGE_NAME }}:latest
-  
+      
+      - name: Upload Source Code to GCS Bucket
+        working-directory: ./bank-data-pipeline
+        run: |
+            FOLDER_NAME=$(basename "$PWD")
+            CURRENT_DATE=$(date +%Y-%m-%d)
+            echo "CURRENT_DATE=${CURRENT_DATE}" 
+            ZIPPED_FILE_NAME="${FOLDER_NAME}-${CURRENT_DATE}.zip"
+            echo "ZIPPED_FILE_NAME=${ZIPPED_FILE_NAME}"
+            zip -r "${ZIPPED_FILE_NAME}" .
+            if gsutil ls -b gs://${FOLDER_NAME}-bucket > /dev/null 2>&1; then
+              echo "Bucket exists"
+            else
+              echo "Bucket does not exists"
+              echo "Creating bucket ${FOLDER_NAME}-bucket..."
+              gsutil mb gs://${FOLDER_NAME}-bucket
+            fi
+            gsutil cp ./bank-data-pipeline/${ZIPPED_FILE_NAME} gs://${FOLDER_NAME}-bucket/${ZIPPED_FILE_NAME}
+            echo "TF_VAR_source_code_name=${ZIPPED_FILE_NAME}" >> $GITHUB_ENV
 
       - name: Terraform init
         id: init
