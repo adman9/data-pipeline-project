@@ -56,7 +56,7 @@ module "cloud_function" {
   available_memory = "512Mi"
   timeout_seconds = 300
   allow_all_users = "allUsers"
-  trigger_bucket_name = google_storage_bucket.trigger_bucket.name
+  trigger_bucket_name = var.trigger_bucket_name
 }
 
 output "function_name" {
