@@ -44,7 +44,7 @@ resource "google_service_account_iam_binding" "cloud_function_sa_use" {
 }
 
 resource "google_service_account_iam_binding" "compute_sa_use" {
-  service_account_id = "${data.google_project.project.number}-compute@developer.gserviceaccount.com"
+  service_account_id = "projects/${var.project_id}/serviceAccounts/${data.google_project.project.number}-compute@developer.gserviceaccount.com"
   role    = "roles/iam.serviceAccountUser"
   members  = [
     "serviceAccount:sa-cicd@favorable-kiln-458413-r9.iam.gserviceaccount.com",
