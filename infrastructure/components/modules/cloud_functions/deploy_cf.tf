@@ -35,10 +35,10 @@ resource "google_cloudfunctions2_function" "my_cloud_function" {
   ]
 }
 
-resource "google_cloudfunctions2_function_iam_member" "invoker" { # Changed resource type
+resource "google_cloudfunctions2_function_iam_member" "invoker" {
   project  = var.project_id
-  location   = var.region # Changed from region
-  function = google_cloudfunctions2_function.my_cloud_function.name #changed
+  location   = var.region 
+  function = google_cloudfunctions2_function.my_cloud_function.name 
   role     = "roles/cloudfunctions.invoker"
   member   = var.allow_all_users
 }

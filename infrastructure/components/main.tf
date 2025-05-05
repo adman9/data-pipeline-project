@@ -20,11 +20,7 @@ resource "google_storage_bucket" "trigger_bucket" {
 resource "google_storage_bucket" "archival_bucket" {
   name     = var.archival_bucket_name
   location = var.region
-}
-
-resource "google_storage_bucket_lifecycle_policy" "archival_bucket_lifecycle" {
-  bucket = google_storage_bucket.archival_bucket.name
-  rule {
+  lifecycle_rule {
     action {
       type = "Delete"
     }
@@ -67,10 +63,6 @@ output "function_name" {
   value = module.cloud_function.function_name
 }
 
-output "function_url" {
-  value     = module.cloud_function.function_url
-  sensitive = true
-}
 
 output "service_account_email" {
   value = module.service_account.service_account_email

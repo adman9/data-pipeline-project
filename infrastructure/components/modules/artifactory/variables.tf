@@ -12,5 +12,4 @@ variable "region" {
 variable "docker_repository_id" {
   description = "The ID of the Docker repository."
   type        = string
-  default     = "my-function-repo"
 }
