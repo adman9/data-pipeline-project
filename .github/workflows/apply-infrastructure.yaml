@@ -80,7 +80,7 @@ jobs:
             docker build -t ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ vars.REPO_NAME }}/${{ vars.IMAGE_NAME }}:latest -f Dockerfile .
             docker push ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ vars.REPO_NAME }}/${{ vars.IMAGE_NAME }}:latest
     
-
+      
       - name: Terraform init
         id: init
         working-directory: ./infrastructure/components

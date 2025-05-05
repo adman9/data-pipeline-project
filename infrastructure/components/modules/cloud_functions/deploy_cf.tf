@@ -22,9 +22,9 @@ resource "google_cloudfunctions2_function" "my_cloud_function" {
       "ARCHIVE_BUCKET" = var.archival_bucket_name
       "SPLITTER" = ","
     }
-    docker_repository = var.docker_repository
-    docker_registry   = "ARTIFACT_REGISTRY"
-    docker_image      = var.image
+    source {
+      image = var.image
+    }
   }
 
   service_config {
