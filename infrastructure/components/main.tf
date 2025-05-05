@@ -50,9 +50,9 @@ module "cloud_function" {
   project_id            = var.project_id
   region                = var.region
   service_account_email = module.service_account.service_account_email
+  source_code_bucket    = var.source_code_bucket
+  source_code_name      = var.source_code_name
   docker_repository     = module.artifact_registry.docker_repository
-  storage_source_bucket = var.source_code_bucket
-  storage_source_name   = var.source_code_name
   function_name         = "gcf-bank-transaction-gcs-bq-v1"
   runtime               = "python311"
   max_instance_count = 10

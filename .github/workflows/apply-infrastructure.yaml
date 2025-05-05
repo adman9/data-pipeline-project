@@ -72,14 +72,6 @@ jobs:
             gsutil mb gs://$BUCKET_NAME
           fi
 
-
-      - name: Build and Push Docker Image
-        working-directory: ./bank-data-pipeline
-        run: |
-            gcloud auth configure-docker europe-north2-docker.pkg.dev
-            docker build -t ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ vars.REPO_NAME }}/${{ vars.IMAGE_NAME }}:latest -f Dockerfile .
-            docker push ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ vars.REPO_NAME }}/${{ vars.IMAGE_NAME }}:latest
-      
       - name: Upload Source Code to GCS Bucket
         working-directory: ./bank-data-pipeline/bnk-data-gcs-bq
         run: |

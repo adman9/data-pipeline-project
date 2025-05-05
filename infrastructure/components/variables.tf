@@ -25,12 +25,17 @@ variable "docker_repository_id" {
   type        = string
 }
 
+variable "image_name" {
+  description = "The Image name of the docker."
+  type        = string
+}
+
 variable "source_code_bucket" {
-  description = "The name of the source code bucket"
+  description = "The Image name of the docker."
   type        = string
 }
 
 variable "source_code_name" {
-  description = "The name of the source code"
+  description = "The Image name of the docker."
   type        = string
 }
