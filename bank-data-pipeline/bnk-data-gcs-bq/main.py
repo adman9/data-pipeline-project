@@ -43,6 +43,7 @@ def data_loading(cloud_event: CloudEvent):
             csv_input = pd.read_csv(payload_io, sep=SPLITTER, dtype=str)
             csv_input['FILE_NAME'] = filename
             csv_input['FETCH_DATE'] = timestamp
+            csv_input = csv_input.where(pd.notnull(csv_input), "").astype(str)
 
             logging.info("Start Load Data Info: File: {}, Rows: {}, Columns: {}, Splitter: ({})".format(filename,len(csv_input), len(csv_input.columns), SPLITTER))
 
