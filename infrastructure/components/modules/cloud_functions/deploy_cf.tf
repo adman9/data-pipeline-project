@@ -21,13 +21,6 @@ resource "google_cloudfunctions2_function" "my_cloud_function" {
         object = var.source_code_name
       }
     }
-    environment_variables = {
-      "PROJECT_ID" = var.project_id
-      "REGION" = var.region
-      "DATASET" = "BNK_DATA"
-      "ARCHIVE_BUCKET" = var.archival_bucket_name
-      "SPLITTER" = ","
-    }
   }
 
   service_config {
@@ -35,7 +28,11 @@ resource "google_cloudfunctions2_function" "my_cloud_function" {
     available_memory    = var.available_memory
     timeout_seconds     = var.timeout_seconds
     environment_variables = {
-        SERVICE_CONFIG_TEST = "config_test"
+      "PROJECT_ID" = var.project_id
+      "REGION" = var.region
+      "DATASET" = "BNK_DATA"
+      "ARCHIVE_BUCKET" = var.archival_bucket_name
+      "SPLITTER" = ","
     }
     ingress_settings = "ALLOW_ALL"
     service_account_email = var.service_account_email
