@@ -6,7 +6,6 @@ variable "project_id" {
 variable "region" {
   description = "The region in which to deploy resources."
   type        = string
-  default     = "us-central1"
 }
 
 variable "docker_repository_id" {
