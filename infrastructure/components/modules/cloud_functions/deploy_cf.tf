@@ -34,13 +34,11 @@ resource "google_cloudfunctions2_function" "my_cloud_function" {
       "ARCHIVE_BUCKET" = var.archival_bucket_name
       "SPLITTER" = ","
     }
-    ingress_settings = "ALLOW_ALL"
     service_account_email = var.service_account_email
   }
 
   event_trigger {
     event_type = "google.cloud.storage.object.v1.finalized"
-    service_account_email = var.service_account_email
     event_filters {
       attribute = "bucket"
       value = var.trigger_bucket_name
