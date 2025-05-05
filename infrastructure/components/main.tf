@@ -37,7 +37,7 @@ resource "google_storage_bucket_lifecycle_policy" "archival_bucket_lifecycle" {
 module "service_account" {
   source                  = "./modules/service_account"
   project_id              = var.project_id
-  service_account_id      = var.service_acount
+  service_account_id      = "gcf-bank-transaction-gcs-bq-sa"
   service_account_display_name = "Cloud Function Service Account"
 }
 
@@ -54,7 +54,7 @@ module "cloud_function" {
   region                = var.region
   service_account_email = module.service_account.service_account_email
   docker_repository     = module.artifact_registry.docker_repository
-  function_name         = var.function_name
+  function_name         = "gcf-bank-transaction-gcs-bq-v1"
   runtime               = "python311"
   max_instance_count = 10
   available_memory = "512Mi"

@@ -31,6 +31,8 @@ jobs:
     env:
       TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
       TF_VAR_region: ${{ vars.GCP_REGION }}
+      TF_VAR_docker_repository_id: ${{ vars.REPO_NAME }}
+      TF_VAR_image_name: ${{ vars.IMAGE_NAME  }}
 
 
     permissions:
@@ -91,7 +93,7 @@ jobs:
         working-directory: ./infrastructure/components
         run: |
           terraform workspace show
-            terraform plan -no-color -input=false -out=tfplan -var-file=terraform.tfvars
+            terraform plan -no-color -input=false -out=tfplan
 
       - name: Terraform Apply
         id: apply
