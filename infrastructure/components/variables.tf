@@ -24,3 +24,8 @@ variable "docker_repository_id" {
   description = "The ID of the Docker repository."
   type        = string
 }
+
+variable "image_name" {
+  description = "The Image name of the docker."
+  type        = string
+}
