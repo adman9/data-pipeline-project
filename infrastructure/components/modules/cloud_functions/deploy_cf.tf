@@ -54,10 +54,3 @@ resource "google_cloudfunctions2_function_iam_member" "member" {
   member = var.allow_all_users
 }
 
-resource "google_cloudfunctions2_function_iam_member" "member_run" {
-  project = google_cloudfunctions2_function.my_cloud_function.project
-  location = google_cloudfunctions2_function.my_cloud_function.location
-  cloud_function = google_cloudfunctions2_function.my_cloud_function.name
-  role = "roles/run.invoker"
-  member = var.allow_all_users
-}
