@@ -43,6 +43,7 @@ resource "google_cloudfunctions2_function" "my_cloud_function" {
 
   event_trigger {
     event_type = "google.cloud.storage.object.v1.finalized"
+    service_account_email = var.service_account_email
     event_filters {
       attribute = "bucket"
       value = var.trigger_bucket_name
