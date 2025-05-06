@@ -6,14 +6,7 @@ This project is designed to process banking data by ingesting files from Google 
 
 ## High-Level Architecture
 
-```plaintext
-+-------------------+       +-------------------+       +-------------------+
-|                   |       |                   |       |                   |
-| Google Cloud      |       | Python Functions  |       | Google BigQuery   |
-| Storage (GCS)     | ----> | (Cloud Functions) | ----> | (Data Warehouse)  |
-|                   |       |                   |       |                   |
-+-------------------+       +-------------------+       +-------------------+
-```
+
 ![alt text](image-1.png)
 
 ## Flow Description:
