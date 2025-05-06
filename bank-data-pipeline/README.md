@@ -64,8 +64,8 @@ You need to install these tools:
 ### Clone the repository
 
 ```console
-git clone git@github.com:ingka-group-digital/enterprise-schema-registry-gcp-iac
-cd enterprise-schema-registry-gcp-iac/Prod (to configure prod environment)
+git clone git@github.com:adman9/data-pipeline-project
+cd bank-data-pipeline/infrastructure/initiate (to configure environment)
 ```
 ### Prerequisite 
 1. Create backend state bucket in gcp console if not exist already(needs to be created before running the terraform modules) which will be mentioned in backend.tf file.
